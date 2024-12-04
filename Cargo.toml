@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+regex = "1.11.1"
 
 [profile.release]
 debug = true
@@ -23,3 +24,11 @@ path = "src/bin/02/a.rs"
 [[bin]]
 name = "02b"
 path = "src/bin/02/b.rs"
+
+[[bin]]
+name = "03a"
+path = "src/bin/03/a.rs"
+
+[[bin]]
+name = "03b"
+path = "src/bin/03/b.rs"

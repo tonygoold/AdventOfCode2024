@@ -1,13 +1,24 @@
 use std::env;
 use std::fs::File;
-use std::io::{BufRead, BufReader};
+use std::io::{BufRead, BufReader, Read};
 
+pub mod computer;
 pub mod grid;
 
 pub fn input_arg() -> String {
     env::args()
         .nth(1)
         .unwrap_or_else(|| "input/input.txt".to_string())
+}
+
+pub fn read_all(path: &str) -> String {
+    let f = File::open(path).expect("Unable to read input file");
+    let mut reader = BufReader::new(f);
+    let mut buf = String::new();
+    reader
+        .read_to_string(&mut buf)
+        .expect("Unable to read input");
+    buf
 }
 
 pub fn read_line(path: &str) -> String {
