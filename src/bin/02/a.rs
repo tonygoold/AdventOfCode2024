@@ -1,3 +1,5 @@
+use std::cmp::Ordering;
+
 use aoc::{input_arg, read_int_rows};
 
 struct SafeState {
@@ -12,7 +14,7 @@ fn is_safe(ns: &[isize], max_dist: isize) -> bool {
         incr: None,
         valid: true,
     };
-    ns.into_iter()
+    ns.iter()
         .fold(init, |mut state, &n| {
             if !state.valid {
                 return state;
@@ -22,17 +24,17 @@ fn is_safe(ns: &[isize], max_dist: isize) -> bool {
                 state.valid = match state.incr {
                     Some(true) => n > prev && n <= prev + max_dist,
                     Some(false) => n < prev && n >= prev - max_dist,
-                    None => {
-                        if n == prev {
-                            false
-                        } else if n > prev {
+                    None => match n.cmp(&prev) {
+                        Ordering::Equal => false,
+                        Ordering::Greater => {
                             state.incr = Some(true);
                             n <= prev + max_dist
-                        } else {
+                        }
+                        Ordering::Less => {
                             state.incr = Some(false);
                             n >= prev - max_dist
                         }
-                    }
+                    },
                 }
             }
             state.prev = Some(n);
@@ -43,6 +45,6 @@ fn is_safe(ns: &[isize], max_dist: isize) -> bool {
 
 fn main() {
     let lists = read_int_rows(&input_arg());
-    let safe = lists.into_iter().filter(|list| is_safe(&list, 3)).count();
+    let safe = lists.into_iter().filter(|list| is_safe(list, 3)).count();
     println!("There are {} safe lists", safe);
 }

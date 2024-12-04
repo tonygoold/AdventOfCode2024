@@ -20,9 +20,7 @@ impl State {
                 }
             }
             Many(prev, incr) => {
-                if n == prev || n.abs_diff(prev) > max_dist {
-                    None
-                } else if (n > prev) != incr {
+                if n == prev || n.abs_diff(prev) > max_dist || (n > prev) != incr {
                     None
                 } else {
                     Some(Many(n, incr))
@@ -53,7 +51,7 @@ fn main() {
     let lists = read_int_rows(&input_arg());
     let safe = lists
         .into_iter()
-        .filter(|list| is_safe(&list, State::Zero, 3, true))
+        .filter(|list| is_safe(list, State::Zero, 3, true))
         .count();
     println!("There are {} safe lists", safe);
 }
