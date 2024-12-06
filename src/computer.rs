@@ -34,7 +34,7 @@ impl<'a> OpIter<'a> {
     }
 }
 
-impl<'a> Iterator for OpIter<'a> {
+impl Iterator for OpIter<'_> {
     type Item = Op;
 
     fn next(&mut self) -> Option<Self::Item> {
