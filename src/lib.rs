@@ -5,6 +5,7 @@ use std::io::{BufRead, BufReader, Read};
 pub mod computer;
 pub mod grid;
 pub mod lattice;
+pub mod math;
 
 pub fn input_arg() -> String {
     env::args()
