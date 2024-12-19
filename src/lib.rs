@@ -6,6 +6,7 @@ pub mod computer;
 pub mod grid;
 pub mod lattice;
 pub mod math;
+pub mod runlen;
 
 pub fn input_arg() -> String {
     env::args()
