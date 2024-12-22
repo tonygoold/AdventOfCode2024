@@ -49,6 +49,23 @@ impl<T> Grid<T> {
             y: 0,
         }
     }
+
+    pub fn neighbours(&self, (row, col): (usize, usize)) -> Vec<(usize, usize)> {
+        let mut cells: Vec<(usize, usize)> = Vec::with_capacity(4);
+        if row > 0 {
+            cells.push((row - 1, col));
+        }
+        if row + 1 < self.rows {
+            cells.push((row + 1, col));
+        }
+        if col > 0 {
+            cells.push((row, col - 1));
+        }
+        if col + 1 < self.cols {
+            cells.push((row, col + 1));
+        }
+        cells
+    }
 }
 
 impl<T> Index<usize> for Grid<T> {
